@@ -1,9 +1,10 @@
 ﻿export const firebaseConfig = {
-  apiKey: "AIzaSyBLBPs-dBmzVVelwugdXB6-5tcAnvUShRI",
-  authDomain: "djami-shop.firebaseapp.com",
-  projectId: "djami-shop",
-  storageBucket: "djami-shop.firebasestorage.app",
-  messagingSenderId: "561310011115",
+  apiKey: "AIzaSyBzoxfzK08tG7at5XLn31PbHfJDEBMxteU",
+  authDomain: "resto-95dfd.firebaseapp.com",
+  projectId: "resto-95dfd",
+  storageBucket: "resto-95dfd.firebasestorage.app",
+  messagingSenderId: "793927799498",
+  appId: "1:793927799498:web:a89bb52c9cd39fc96b5a33",
 };
 
-export const dashboardAdminUid = "CbQEgfqVxWNFuKkQhTpqL5we1jq2";
+export const dashboardAdminUid = "mvDhKiXSv7duDfp5ch2UxNO2kBp1";

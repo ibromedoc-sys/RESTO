@@ -1,4 +1,4 @@
-name: Build DJAMI SHOP APK
+name: Build LAUR&DOR APK
 
 on:
   workflow_dispatch:
@@ -66,12 +66,12 @@ jobs:
         run: |
           test -n "$ANDROID_KEYSTORE_BASE64"
           printf '%s' "$ANDROID_KEYSTORE_BASE64" \
-            | base64 --decode > "$RUNNER_TEMP/djami-shop-upload.keystore"
-          chmod 600 "$RUNNER_TEMP/djami-shop-upload.keystore"
+            | base64 --decode > "$RUNNER_TEMP/laur-dor-upload.keystore"
+          chmod 600 "$RUNNER_TEMP/laur-dor-upload.keystore"
 
       - name: Build signed release APK
         env:
-          P4A_RELEASE_KEYSTORE: ${{ runner.temp }}/djami-shop-upload.keystore
+          P4A_RELEASE_KEYSTORE: ${{ runner.temp }}/laur-dor-upload.keystore
           P4A_RELEASE_KEYSTORE_PASSWD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           P4A_RELEASE_KEYALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           P4A_RELEASE_KEYALIAS_PASSWD: ${{ secrets.ANDROID_KEY_PASSWORD }}
@@ -81,10 +81,10 @@ jobs:
       - name: Upload signed release APK
         uses: actions/upload-artifact@v4
         with:
-          name: DJAMI-SHOP-Android-Release-APK
+          name: LAUR-DOR-Android-Release-APK
           path: bin/*.apk
           if-no-files-found: error
 
       - name: Remove signing keystore
         if: always()
-        run: rm -f "$RUNNER_TEMP/djami-shop-upload.keystore"
+        run: rm -f "$RUNNER_TEMP/laur-dor-upload.keystore"

@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "561310011115",
-    "project_id": "djami-shop",
-    "storage_bucket": "djami-shop.firebasestorage.app"
+    "project_number": "793927799498",
+    "project_id": "resto-95dfd",
+    "storage_bucket": "resto-95dfd.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:561310011115:android:894966a6041fe44dc938ae",
+        "mobilesdk_app_id": "1:793927799498:android:b7676e83683eaf3b6b5a33",
         "android_client_info": {
-          "package_name": "com.djamishop.app"
+          "package_name": "com.resto.app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBLBPs-dBmzVVelwugdXB6-5tcAnvUShRI"
+          "current_key": "AIzaSyBzoxfzK08tG7at5XLn31PbHfJDEBMxteU"
         }
       ],
       "services": {

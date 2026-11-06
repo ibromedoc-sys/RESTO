@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fff8e9">
+    <meta name="description" content="Découvrez Laur & Dor Gourmet, restaurant et cuisine à partager.">
+    <title>LAUR&amp;DOR — Gourmet</title>
+    <script>
+      const isStandalone =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone === true;
+      if (
+        window.location.hostname === "laur-dor.firebaseapp.com" &&
+        !isStandalone
+      ) {
+        window.location.replace(
+          `https://laur-dor.web.app${window.location.pathname}${window.location.search}${window.location.hash}`,
+        );
+      }
+    </script>
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" href="./assets/resto-icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="./assets/resto-icon-192.png">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <div class="announcement">
+      <span>BIENVENUE CHEZ LAUR & DOR GOURMET</span>
+      <span class="announcement-detail">Cuisine <i>✦</i> Partage <i>✦</i> Gourmet</span>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="#accueil" data-page-link="accueil" aria-label="LAUR&amp;DOR, accueil">
+        <img src="./assets/resto-icon.png" alt="" width="52" height="52">
+        <span class="brand-name">LAUR&amp;DOR<small>GOURMET</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <button class="nav-link active" type="button" data-page="accueil">Accueil</button>
+        <button class="nav-link" type="button" data-page="produits">La carte</button>
+        <button class="nav-link" type="button" data-page="infos">Infos & actualités</button>
+        <button class="nav-link" type="button" data-page="apropos">À propos</button>
+      </nav>
+      <a class="header-cta" data-whatsapp href="https://wa.me/22899057931" target="_blank" rel="noopener noreferrer">
+        <span class="whatsapp-mark" aria-hidden="true">⌕</span>
+        <span>Nous contacter</span>
+      </a>
+    </header>
+
+    <main>
+      <p class="firebase-error" data-firebase-status role="alert" hidden></p>
+      <section class="app-banner" aria-label="LAUR&amp;DOR et notifications">
+        <div class="app-banner-copy">
+          <span class="app-banner-icon" aria-hidden="true">✦</span>
+          <span><b>LAUR&amp;DOR sur votre téléphone</b><small>Installez le site et restez informé des actualités.</small></span>
+        </div>
+        <div class="app-banner-actions">
+          <button class="app-action app-action-notifications" type="button" data-enable-notifications>
+            <span aria-hidden="true">♧</span> Activer les notifications
+          </button>
+          <span class="app-ready-badge" data-notifications-ready hidden>
+            <span aria-hidden="true">✓</span> Notifications activées
+          </span>
+          <span class="app-ready-badge" data-installed-badge hidden>
+            <span aria-hidden="true">✓</span> Icône installée
+          </span>
+          <button class="app-action app-action-install" type="button" data-install-app aria-label="Installer LAUR&amp;DOR">
+            Ajouter l’icône <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <p class="app-banner-status" data-app-status role="status" aria-live="polite" hidden></p>
+      </section>
+      <section class="page-view active" id="page-accueil" aria-labelledby="hero-title">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> LA CUISINE QUI RASSEMBLE</p>
+            <h1 id="hero-title" data-home-title>La cuisine qui<br><em>rassemble.</em></h1>
+            <p class="hero-description" data-home-description>Bienvenue chez Laur & Dor Gourmet. Découvrez la carte et les actualités de notre restaurant.</p>
+            <div class="hero-actions">
+              <button class="button button-dark" type="button" data-go="produits"><span data-home-products>Découvrir la carte</span><span aria-hidden="true">↗</span></button>
+              <button class="text-link" type="button" data-go="apropos">En savoir plus <span aria-hidden="true">→</span></button>
+            </div>
+            <div class="hero-note">
+              <span class="note-stars" aria-hidden="true">★★★★★</span>
+              <span>Cuisine <b>·</b> Partage <b>·</b> Gourmet</span>
+            </div>
+          </div>
+          <div class="hero-art" aria-label="Images de LAUR&amp;DOR Gourmet">
+            <div class="logo-carousel" data-logo-carousel>
+              <img class="logo-carousel-image is-active" data-home-logo src="./assets/resto-icon.png" alt="Logo LAUR&amp;DOR Gourmet">
+              <button class="logo-control previous" type="button" data-logo-step="-1" aria-label="Image précédente" title="Image précédente">‹</button>
+              <button class="logo-control next" type="button" data-logo-step="1" aria-label="Image suivante" title="Image suivante">›</button>
+            </div>
+            <div class="hero-index" aria-label="Position dans le carrousel"><span data-logo-current>01</span><i></i><span data-logo-total>05</span></div>
+          </div>
+        </div>
+
+        <div class="value-strip" aria-label="Nos engagements">
+          <div><span class="value-icon">✿</span><span><b>Cuisine</b><small>Des saveurs à découvrir</small></span></div>
+          <div><span class="value-icon">♡</span><span><b>Partage</b><small>Des moments à savourer</small></span></div>
+          <div><span class="value-icon">✧</span><span><b>Confiance</b><small>Vous sentir bien</small></span></div>
+          <button type="button" class="strip-link" data-go="infos"><span data-home-news>Suivre nos actualités</span><span aria-hidden="true">↗</span></button>
+        </div>
+
+        <section class="home-products section-wrap" aria-labelledby="home-products-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">LA CARTE LAUR & DOR</p><h2 id="home-products-title">À découvrir</h2></div>
+            <button type="button" class="text-link" data-go="produits">Voir la carte <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="product-grid product-grid-home" data-product-list="home"></div>
+        </section>
+
+        <section class="home-about">
+          <div class="about-mark">L&amp;D<span>✦</span></div>
+          <div><p class="eyebrow">L’ESPRIT LAUR & DOR</p><h2>Un bon repas<br>se partage.</h2></div>
+          <button type="button" class="button button-outline" data-go="apropos">Découvrir notre univers <span aria-hidden="true">↗</span></button>
+        </section>
+      </section>
+
+      <section class="page-view content-page" id="page-produits" aria-labelledby="products-title" hidden>
+        <div class="page-banner">
+          <p class="eyebrow">PRENEZ LE TEMPS DE VOUS CHOISIR</p>
+          <h1 id="products-title">Notre <em>carte</em></h1>
+          <p>Retrouvez les plats et spécialités de Laur & Dor Gourmet.</p>
+        </div>
+        <div class="catalog-toolbar">
+          <span class="catalog-count" data-product-count>0 produit</span>
+          <label class="search-box">
+            <span class="visually-hidden">Rechercher un produit</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+            <input type="search" data-product-search placeholder="Rechercher un produit…">
+          </label>
+        </div>
+        <div class="product-grid" data-product-list="catalog"></div>
+      </section>
+
+      <section class="page-view content-page" id="page-infos" aria-labelledby="news-title" hidden>
+        <div class="page-banner">
+          <p class="eyebrow">RESTEZ AU COURANT</p>
+          <h1 id="news-title" data-news-title>Infos & <em>actualités</em></h1>
+          <p>Les nouvelles et les moments à partager avec Laur & Dor Gourmet.</p>
+        </div>
+        <div class="news-grid" data-news-list></div>
+      </section>
+
+      <section class="page-view content-page about-page" id="page-apropos" aria-labelledby="about-title" hidden>
+        <div class="about-hero">
+          <div class="about-photo" role="img" aria-label="Photo de présentation à ajouter">
+            <img class="about-photo-image" data-about-photo alt="Présentation de Laur & Dor Gourmet" hidden>
+            <span class="photo-placeholder"><b>Votre photo ici</b><small>Ajoutez une URL d’image depuis le tableau de bord</small></span>
+          </div>
+          <div class="about-copy">
+            <p class="eyebrow">QUI SOMMES-NOUS ?</p>
+            <h1 id="about-title" data-about-title>Bienvenue chez<br><em>Laur & Dor Gourmet.</em></h1>
+            <p data-about-description>Un restaurant où découvrir une cuisine généreuse et partager un bon moment.</p>
+            <p>Parcourez notre sélection, suivez nos actualités et contactez-nous pour toute question ou commande.</p>
+            <div class="about-links">
+              <a data-about-site hidden target="_blank" rel="noopener noreferrer"></a>
+              <a data-about-contact hidden target="_blank" rel="noopener noreferrer"></a>
+            </div>
+            <a class="button button-dark" data-whatsapp href="https://wa.me/22899057931" target="_blank" rel="noopener noreferrer">Parlons ensemble <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="about-values">
+          <div><span>01</span><h2>Cuisine</h2><p>Des spécialités à découvrir au fil de la carte.</p></div>
+          <div><span>02</span><h2>Partage</h2><p>Un restaurant pour savourer de bons moments.</p></div>
+          <div><span>03</span><h2>Confiance</h2><p>Parce que se sentir bien change tout.</p></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="footer-brand" href="#accueil" data-page-link="accueil"><img src="./assets/resto-icon.png" alt="" width="42" height="42"><span>LAUR&amp;DOR</span></a>
+      <span>Laur & Dor · Gourmet</span>
+      <span>© <span data-year></span> Laur & Dor Gourmet</span>
+    </footer>
+
+    <nav class="mobile-nav" aria-label="Navigation mobile">
+      <button class="mobile-nav-link active" type="button" data-page="accueil"><span aria-hidden="true">⌂</span>Accueil</button>
+      <button class="mobile-nav-link" type="button" data-page="produits"><span aria-hidden="true">◇</span>Carte</button>
+      <button class="mobile-nav-link" type="button" data-page="infos"><span aria-hidden="true">▤</span>Infos</button>
+      <button class="mobile-nav-link" type="button" data-page="apropos"><span aria-hidden="true">♡</span>À propos</button>
+    </nav>
+  </body>
+</html>

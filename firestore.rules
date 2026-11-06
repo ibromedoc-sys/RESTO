@@ -4,7 +4,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     function isAdmin() {
       return request.auth != null
-        && request.auth.uid == "CbQEgfqVxWNFuKkQhTpqL5we1jq2";
+        && request.auth.uid == "mvDhKiXSv7duDfp5ch2UxNO2kBp1";
     }
 
     match /produits/{document} {

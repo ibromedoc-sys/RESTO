@@ -1,4 +1,4 @@
-"""Read-only Firebase data access for the DJAMI SHOP Android application."""
+"""Read-only Firebase data access for the RESTO Android application."""
 
 import hashlib
 import json
@@ -58,9 +58,9 @@ def _firebase_config():
                 "Configuration Firebase invalide ou fichier google-services.json absent."
             ) from error
 
-        if package_name != "com.djamishop.app":
+        if package_name != "com.resto.app":
             raise FirebaseError(
-                "google-services.json ne correspond pas au package com.djamishop.app."
+            "google-services.json ne correspond pas au package com.resto.app."
             )
 
         _FIREBASE_CONFIG = {

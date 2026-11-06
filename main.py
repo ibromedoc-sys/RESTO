@@ -146,7 +146,7 @@ MDScreen:
         pos: root.pos
 
         MDTopAppBar:
-            title: "DJAMI SHOP"
+            title: "RESTO"
 
         MDScreenManager:
             id: screen_manager
@@ -200,12 +200,11 @@ MDScreen:
                                     fit_mode: "contain"
                                     size_hint: 1, 1
                             MDLabel:
-                                text: "DJAMI SHOP"
+                                text: "LAUR&DOR"
                                 halign: "center"
                                 font_size: "22sp"
                                 bold: True
                                 color: 1, 1, 1, 1
-                                opacity: 0 if app.logo_available else 1
                         MDLabel:
                             text: app.accueil_description
                             halign: "center"
@@ -383,22 +382,21 @@ class VenteApp(MDApp):
     logo_available = BooleanProperty(False)
     owner_photo = StringProperty("")
     owner_photo_available = BooleanProperty(False)
-    accueil_titre = StringProperty("Bienvenue Chez SUPERLIFE TOGO!")
+    accueil_titre = StringProperty("Bienvenue chez Laur & Dor Gourmet")
     accueil_description = StringProperty(
-        "Découvrez nos produits et nos infos en exclusivités."
+        "Découvrez la carte et les actualités de notre restaurant."
     )
-    accueil_bouton_produits = StringProperty("NOS PRODUITS")
+    accueil_bouton_produits = StringProperty("LA CARTE")
     accueil_bouton_infos = StringProperty("NOS INFOS/PUBS")
     infos_titre = StringProperty("INFOS & ACTUALITÉS")
     apropos_titre = StringProperty("À PROPOS")
     apropos_description = StringProperty(
-        " Pour toutes informations sur notre entreprise, rendez-vous sur "
-        "notre site Web officiel."
+        "Un restaurant où découvrir une cuisine généreuse et partager un bon moment."
     )
-    apropos_lien_texte = StringProperty("SUPERLIFE-TOGO.COM")
-    apropos_lien_url = StringProperty("https://superlife-togo.com")
+    apropos_lien_texte = StringProperty("RESTO WEB")
+    apropos_lien_url = StringProperty("https://laur-dor.web.app")
     apropos_contact_texte = StringProperty("CONTACT")
-    apropos_contact_url = StringProperty("https://superlife-togo.com")
+    apropos_contact_url = StringProperty("https://laur-dor.web.app")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -845,7 +843,7 @@ MDCard:
             )
         except (ImportError, AttributeError, RuntimeError, JavaException) as error:
             Logger.exception(
-                "DJAMI SHOP: impossible de vérifier la connexion Internet: "
+                "RESTO: impossible de vérifier la connexion Internet: "
                 + str(error)
             )
             return False
@@ -926,14 +924,14 @@ MDCard:
         home = result["home"]
         about = result["about"]
         self.accueil_titre = home.get(
-            "accueil_titre", "Bienvenue Chez SUPERLIFE TOGO!"
+            "accueil_titre", "Bienvenue chez Laur & Dor Gourmet"
         )
         self.accueil_description = home.get(
             "accueil_description",
-            "Découvrez nos produits et nos infos en exclusivités.",
+            "Découvrez la carte et les actualités de notre restaurant.",
         )
         self.accueil_bouton_produits = home.get(
-            "accueil_bouton_produits", "PRODUITS"
+            "accueil_bouton_produits", "LA CARTE"
         )
         self.accueil_bouton_infos = home.get(
             "accueil_bouton_infos", "NOS INFOS"
@@ -942,20 +940,19 @@ MDCard:
         self.apropos_titre = about.get("apropos_titre", "À PROPOS")
         self.apropos_description = about.get(
             "apropos_description",
-            " Pour toutes informations sur notre entreprise, rendez-vous "
-            "sur notre site Web officiel.",
+            "Un restaurant où découvrir une cuisine généreuse et partager un bon moment.",
         )
         self.apropos_lien_texte = about.get(
-            "apropos_lien_texte", "SUPERLIFE-TOGO.COM"
+            "apropos_lien_texte", "RESTO WEB"
         )
         self.apropos_lien_url = about.get(
-            "apropos_lien_url", "https://superlife-togo.com"
+            "apropos_lien_url", "https://laur-dor.web.app"
         )
         self.apropos_contact_texte = about.get(
             "apropos_contact_texte", "CONTACT"
         )
         self.apropos_contact_url = about.get(
-            "apropos_contact_url", "https://superlife-togo.com"
+            "apropos_contact_url", "https://laur-dor.web.app"
         )
 
         self._home_logo_paths = result["logos"]

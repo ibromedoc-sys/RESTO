@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fffaf7">
+    <title>Administration — LAUR&amp;DOR</title>
+    <link rel="icon" href="./assets/resto-icon.png" type="image/png">
+    <link rel="stylesheet" href="./dashboard.css">
+    <script type="module" src="./dashboard.js"></script>
+  </head>
+  <body>
+    <section class="login-view" id="login-view" hidden>
+      <a class="brand login-brand" href="./index.html">
+        <img src="./assets/resto-icon.png" alt="" width="58" height="58">
+        <span>LAUR&amp;DOR<small>ESPACE ADMINISTRATION</small></span>
+      </a>
+      <form class="login-card" id="login-form">
+        <p class="eyebrow">ESPACE SÉCURISÉ</p>
+        <h1>Ravi de vous revoir.</h1>
+        <p class="muted">Connectez-vous avec le compte administrateur LAUR&amp;DOR.</p>
+        <div class="notice" id="login-notice" role="status" aria-live="polite" hidden></div>
+        <label for="login-email">Adresse e-mail</label>
+        <input id="login-email" name="email" type="email" autocomplete="username" required>
+        <label for="login-password">Mot de passe</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+        <button class="button button-primary" type="submit">Se connecter <span>↗</span></button>
+        <a class="back-link" href="./index.html">← Retour au site</a>
+      </form>
+      <p class="login-caption">Laur & Dor <i>✦</i> Gourmet</p>
+    </section>
+
+    <div class="loading-view" id="loading-view">
+      <span class="loading-mark">L&amp;D</span>
+      <p>Connexion à l’espace LAUR&amp;DOR…</p>
+    </div>
+
+    <div class="admin-app" id="admin-app" hidden>
+      <header class="topbar">
+        <a class="brand" href="./index.html">
+          <img src="./assets/resto-icon.png" alt="" width="48" height="48">
+          <span>LAUR&amp;DOR<small>ESPACE ADMINISTRATION</small></span>
+        </a>
+        <div class="topbar-actions">
+          <a class="store-link" href="./index.html" target="_blank" rel="noopener noreferrer">Voir le site <span>↗</span></a>
+          <span class="admin-identity"><span class="avatar">L&amp;D</span><span id="admin-email"></span></span>
+          <button class="button button-quiet" id="sign-out" type="button">Déconnexion</button>
+        </div>
+      </header>
+
+      <div class="admin-layout">
+        <aside class="sidebar">
+          <p class="sidebar-label">ESPACE DE GESTION</p>
+          <nav class="side-nav" aria-label="Sections du tableau de bord">
+            <button class="side-link active" type="button" data-panel="products-panel">
+              <span class="side-icon">◇</span><span>Carte</span><span class="side-count" id="product-count">0</span>
+            </button>
+            <button class="side-link" type="button" data-panel="news-panel">
+              <span class="side-icon">▤</span><span>Actualités</span><span class="side-count" id="news-count">0</span>
+            </button>
+            <button class="side-link" type="button" data-panel="content-panel">
+              <span class="side-icon">✿</span><span>Contenu du site</span>
+            </button>
+          </nav>
+          <div class="sidebar-note">
+            <span>✦</span>
+            <p><b>Votre espace LAUR&amp;DOR</b><br>Gérez votre restaurant en toute simplicité.</p>
+          </div>
+          <a class="sidebar-back" href="./index.html">← Retour au site</a>
+        </aside>
+
+        <main class="workspace">
+          <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
+          <div class="welcome-row">
+            <div>
+              <p class="eyebrow">TABLEAU DE BORD</p>
+              <h1 id="page-title">Bonjour, bienvenue <span>✦</span></h1>
+              <p class="muted">Gérez le contenu de LAUR&amp;DOR.</p>
+            </div>
+            <div class="today-badge"><span class="status-dot"></span>Connexion sécurisée</div>
+          </div>
+
+          <section class="summary-grid" aria-label="Résumé du restaurant">
+            <article class="summary-card">
+              <span class="summary-icon pink">◇</span>
+              <span class="summary-label">ÉLÉMENTS À LA CARTE</span>
+              <strong id="product-total">0</strong>
+              <small>Sur votre carte</small>
+            </article>
+            <article class="summary-card">
+              <span class="summary-icon gold">▤</span>
+              <span class="summary-label">ACTUALITÉS PUBLIÉES</span>
+              <strong id="news-total">0</strong>
+              <small>Partagées avec vos clients</small>
+            </article>
+            <article class="summary-card highlight-card">
+              <span class="summary-label">LAUR & DOR GOURMET</span>
+              <strong>La cuisine<br>qui rassemble.</strong>
+              <small>Chaque jour, à vos côtés.</small>
+            </article>
+          </section>
+
+          <section class="management-panel" id="products-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">VOTRE CARTE</p><h2>Gestion des plats</h2><p class="muted">Ajoutez, modifiez ou retirez un élément de la carte.</p></div>
+              <span class="live-badge"><i></i>Synchronisé avec Firebase</span>
+            </div>
+            <div class="section-grid">
+              <form class="editor-card" id="product-form" data-record-form="produits">
+                <div class="card-heading"><span class="form-step">01</span><div><h3 id="product-form-title">Ajouter un plat</h3><p>Les champs marqués d’un * sont obligatoires.</p></div></div>
+                <input name="id" type="hidden">
+                <label for="product-name">Nom du plat <em>*</em></label>
+                <input id="product-name" name="nom" maxlength="120" placeholder="Ex. Plat du jour" required>
+                <div class="field-pair">
+                  <div><label for="product-category">Catégorie</label><input id="product-category" name="categorie" maxlength="80" placeholder="Entrée, plat, dessert…"></div>
+                  <div><label for="product-price">Prix <em>*</em></label><input id="product-price" name="prix" maxlength="60" placeholder="Ex. 5 000 F CFA" required></div>
+                </div>
+                <label for="product-description">Description</label>
+                <textarea id="product-description" name="description" rows="3" maxlength="2000" placeholder="Décrivez le plat et ses ingrédients…"></textarea>
+                <label for="product-phone">Numéro WhatsApp de commande</label>
+                <input id="product-phone" name="telephone_commande" type="tel" inputmode="tel" maxlength="25" value="22899057931" required>
+                <p class="field-help">Indicatif international inclus, par exemple +228 90 57 93 1.</p>
+                <div class="image-fields" data-image-fields>
+                  <p class="group-label">PHOTOS DU PLAT <span>Jusqu’à 3 images</span></p>
+                  <div class="image-field" data-image-field="image">
+                    <label for="product-image-url">Image 1 — URL HTTPS</label>
+                    <input id="product-image-url" name="imageUrl_image" type="url" maxlength="2048" placeholder="https://…">
+                    <label for="product-image-file">Ou choisir un fichier</label>
+                    <input id="product-image-file" name="imageFile_image" type="file" accept="image/jpeg,image/png,image/webp">
+                    <div class="image-preview" hidden><img alt="Aperçu de l’image"><span></span></div>
+                  </div>
+                  <div class="image-field" data-image-field="image_2">
+                    <label for="product-image-2-url">Image 2 — URL HTTPS</label>
+                    <input id="product-image-2-url" name="imageUrl_image_2" type="url" maxlength="2048" placeholder="https://…">
+                    <label for="product-image-2-file">Ou choisir un fichier</label>
+                    <input id="product-image-2-file" name="imageFile_image_2" type="file" accept="image/jpeg,image/png,image/webp">
+                    <div class="image-preview" hidden><img alt="Aperçu de l’image"><span></span></div>
+                  </div>
+                  <div class="image-field" data-image-field="image_3">
+                    <label for="product-image-3-url">Image 3 — URL HTTPS</label>
+                    <input id="product-image-3-url" name="imageUrl_image_3" type="url" maxlength="2048" placeholder="https://…">
+                    <label for="product-image-3-file">Ou choisir un fichier</label>
+                    <input id="product-image-3-file" name="imageFile_image_3" type="file" accept="image/jpeg,image/png,image/webp">
+                    <div class="image-preview" hidden><img alt="Aperçu de l’image"><span></span></div>
+                  </div>
+                  <p class="field-help">Images JPEG, PNG ou WebP de 5 Mo maximum. Les fichiers sont hébergés sur Cloudinary.</p>
+                </div>
+                <div class="form-actions"><button class="button button-primary" type="submit">Enregistrer le plat <span>↗</span></button><button class="button button-quiet cancel-edit" type="button" data-cancel hidden>Annuler</button></div>
+              </form>
+              <section class="list-card">
+                <div class="card-heading list-heading"><div><p class="eyebrow">FIRESTORE</p><h3>Éléments de la carte</h3></div><span class="count-pill" id="product-list-count">0</span></div>
+                <div class="record-list" id="product-list"><p class="empty-state">Chargement de la carte…</p></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="management-panel" id="news-panel" hidden>
+            <div class="panel-heading"><div><p class="eyebrow">FAITES PASSER LE MOT</p><h2>Actualités & publications</h2><p class="muted">Partagez vos nouvelles avec les visiteurs de LAUR&amp;DOR.</p></div><span class="live-badge"><i></i>Synchronisé avec Firebase</span></div>
+            <div class="section-grid">
+              <form class="editor-card" id="news-form" data-record-form="publications">
+                <div class="card-heading"><span class="form-step">02</span><div><h3 id="news-form-title">Nouvelle actualité</h3><p>Rédigez une information à partager.</p></div></div>
+                <input name="id" type="hidden">
+                <label for="news-title">Titre <em>*</em></label>
+                <input id="news-title" name="titre" maxlength="160" placeholder="Titre de votre actualité" required>
+                <label for="news-content">Contenu</label>
+                <textarea id="news-content" name="contenu" rows="6" maxlength="5000" placeholder="Rédigez votre message…"></textarea>
+                <label for="news-date">Date</label>
+                <input id="news-date" name="date" type="text" inputmode="numeric" placeholder="AAAA-MM-JJ ou JJ-MM-AAAA">
+                <div class="image-fields" data-image-fields>
+                  <p class="group-label">PHOTOS DE L’ACTUALITÉ <span>Jusqu’à 3 images</span></p>
+                  <div class="image-field" data-image-field="image">
+                    <label for="news-image-url">Image 1 — URL HTTPS</label>
+                    <input id="news-image-url" name="imageUrl_image" type="url" maxlength="2048" placeholder="https://…">
+                    <label for="news-image-file">Ou choisir un fichier</label>
+                    <input id="news-image-file" name="imageFile_image" type="file" accept="image/jpeg,image/png,image/webp">
+                    <div class="image-preview" hidden><img alt="Aperçu de l’image"><span></span></div>
+                  </div>
+                  <div class="image-field" data-image-field="image_2">
+                    <label for="news-image-2-url">Image 2 — URL HTTPS</label>
+                    <input id="news-image-2-url" name="imageUrl_image_2" type="url" maxlength="2048" placeholder="https://…">
+                    <label for="news-image-2-file">Ou choisir un fichier</label>
+                    <input id="news-image-2-file" name="imageFile_image_2" type="file" accept="image/jpeg,image/png,image/webp">
+                    <div class="image-preview" hidden><img alt="Aperçu de l’image"><span></span></div>
+                  </div>
+                  <div class="image-field" data-image-field="image_3">
+                    <label for="news-image-3-url">Image 3 — URL HTTPS</label>
+                    <input id="news-image-3-url" name="imageUrl_image_3" type="url" maxlength="2048" placeholder="https://…">
+                    <label for="news-image-3-file">Ou choisir un fichier</label>
+                    <input id="news-image-3-file" name="imageFile_image_3" type="file" accept="image/jpeg,image/png,image/webp">
+                    <div class="image-preview" hidden><img alt="Aperçu de l’image"><span></span></div>
+                  </div>
+                  <p class="field-help">JPEG, PNG ou WebP, 5 Mo maximum par image.</p>
+                </div>
+                <div class="form-actions"><button class="button button-primary" type="submit">Publier l’actualité <span>↗</span></button><button class="button button-quiet cancel-edit" type="button" data-cancel hidden>Annuler</button></div>
+              </form>
+              <section class="list-card">
+                <div class="card-heading list-heading"><div><p class="eyebrow">FIRESTORE</p><h3>Publications existantes</h3></div><span class="count-pill" id="news-list-count">0</span></div>
+                <div class="record-list" id="news-list"><p class="empty-state">Chargement des actualités…</p></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="management-panel" id="content-panel" hidden>
+            <div class="panel-heading"><div><p class="eyebrow">VOTRE IDENTITÉ EN LIGNE</p><h2>Contenu du site</h2><p class="muted">Personnalisez les textes visibles sur LAUR&amp;DOR.</p></div></div>
+            <div class="content-grid">
+              <form class="editor-card content-card" id="home-content-form" data-content-form="accueil">
+                <div class="card-heading"><span class="form-step">03</span><div><h3>Page d’accueil</h3><p>Le titre et les textes de présentation.</p></div></div>
+                <label for="home-title">Titre de bienvenue</label><input id="home-title" name="accueil_titre" maxlength="160" data-content-field>
+                <label for="home-description">Texte de présentation</label><textarea id="home-description" name="accueil_description" rows="4" maxlength="1000" data-content-field></textarea>
+                <div class="field-pair">
+                  <div><label for="home-products-button">Bouton carte</label><input id="home-products-button" name="accueil_bouton_produits" maxlength="60" data-content-field></div>
+                  <div><label for="home-news-button">Bouton actualités</label><input id="home-news-button" name="accueil_bouton_infos" maxlength="60" data-content-field></div>
+                </div>
+                <div class="image-fields home-logo-fields">
+                  <p class="group-label">IMAGES DE L’ACCUEIL <span>Défilement automatique</span></p>
+                  <p class="field-help">La première image est le logo LAUR&amp;DOR. Utilisez une URL HTTPS, un chemin local comme images/logo1.png ou choisissez un fichier.</p>
+                  <div class="image-field" data-home-logo-field="logo_1">
+                    <label for="home-logo-1">Image 1 — logo LAUR&amp;DOR</label>
+                    <input id="home-logo-1" name="logo_1" type="text" inputmode="url" data-content-field data-logo-reference>
+                    <label for="home-logo-file-1">Ou choisir un fichier</label>
+                    <input id="home-logo-file-1" name="logoFile_1" type="file" accept="image/jpeg,image/png,image/webp" data-logo-file>
+                    <div class="image-preview" data-home-logo-preview hidden><img alt="Aperçu de l’image"><span></span></div>
+                  </div>
+                  <div class="image-field" data-home-logo-field="logo_2">
+                    <label for="home-logo-2">Image 2</label>
+                    <input id="home-logo-2" name="logo_2" type="text" inputmode="url" data-content-field data-logo-reference>
+                    <label for="home-logo-file-2">Ou choisir un fichier</label>
+                    <input id="home-logo-file-2" name="logoFile_2" type="file" accept="image/jpeg,image/png,image/webp" data-logo-file>
+                    <div class="image-preview" data-home-logo-preview hidden><img alt="Aperçu de l’image"><span></span></div>
+                  </div>
+                  <div class="image-field" data-home-logo-field="logo_3">
+                    <label for="home-logo-3">Image 3</label>
+                    <input id="home-logo-3" name="logo_3" type="text" inputmode="url" data-content-field data-logo-reference>
+                    <label for="home-logo-file-3">Ou choisir un fichier</label>
+                    <input id="home-logo-file-3" name="logoFile_3" type="file" accept="image/jpeg,image/png,image/webp" data-logo-file>
+                    <div class="image-preview" data-home-logo-preview hidden><img alt="Aperçu de l’image"><span></span></div>
+                  </div>
+                  <div class="image-field" data-home-logo-field="logo_4">
+                    <label for="home-logo-4">Image 4</label>
+                    <input id="home-logo-4" name="logo_4" type="text" inputmode="url" data-content-field data-logo-reference>
+                    <label for="home-logo-file-4">Ou choisir un fichier</label>
+                    <input id="home-logo-file-4" name="logoFile_4" type="file" accept="image/jpeg,image/png,image/webp" data-logo-file>
+                    <div class="image-preview" data-home-logo-preview hidden><img alt="Aperçu de l’image"><span></span></div>
+                  </div>
+                </div>
+                <button class="button button-primary" type="submit">Enregistrer l’accueil <span>↗</span></button>
+              </form>
+              <form class="editor-card content-card" id="about-content-form" data-content-form="apropos">
+                <div class="card-heading"><span class="form-step">04</span><div><h3>À propos & contact</h3><p>Vos informations et liens utiles.</p></div></div>
+                <label for="infos-title">Titre de la page actualités</label><input id="infos-title" name="infos_titre" maxlength="160" data-content-field>
+                <label for="about-title">Titre de la page</label><input id="about-title" name="apropos_titre" maxlength="160" data-content-field>
+                <label for="about-description">Présentation</label><textarea id="about-description" name="apropos_description" rows="4" maxlength="2000" data-content-field></textarea>
+                <label for="about-link-text">Texte du lien principal</label><input id="about-link-text" name="apropos_lien_texte" maxlength="80" data-content-field>
+                <label for="about-link-url">Adresse du site officiel (HTTPS)</label><input id="about-link-url" name="apropos_lien_url" type="url" maxlength="2048" placeholder="https://…" data-content-field>
+                <label for="about-contact-text">Texte du lien contact</label><input id="about-contact-text" name="apropos_contact_texte" maxlength="80" data-content-field>
+                <label for="about-contact-url">Adresse de contact (HTTPS)</label><input id="about-contact-url" name="apropos_contact_url" type="url" maxlength="2048" placeholder="https://…" data-content-field>
+                <label for="contact-phone">Numéro WhatsApp principal</label><input id="contact-phone" name="telephone_contact" type="tel" inputmode="tel" maxlength="25" data-content-field required>
+                <p class="field-help">Ce numéro est utilisé par « Nous contacter » et « Parlons ensemble ». Indicatif international inclus.</p>
+                <label for="about-photo">Photo de présentation — URL HTTPS</label><input id="about-photo" name="photo" type="url" maxlength="2048" placeholder="https://…" data-content-field>
+                <button class="button button-primary" type="submit">Enregistrer ces informations <span>↗</span></button>
+              </form>
+            </div>
+          </section>
+
+          <footer class="workspace-footer"><span>LAUR&amp;DOR <i>✦</i> Laur & Dor Gourmet</span><span>Administration sécurisée</span></footer>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

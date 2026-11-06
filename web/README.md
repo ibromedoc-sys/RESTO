@@ -1,23 +1,19 @@
-# DJAMI SHOP — tableau de bord administrateur
+# RESTO — tableau de bord administrateur
 
 Le tableau de bord utilise Firebase Authentication et Firestore du projet
-`djami-shop`. Il n'initialise pas Firebase Storage et n'inclut aucun mot de
+`resto-95dfd`. Il n'initialise pas Firebase Storage et n'inclut aucun mot de
 passe ni credential de compte de service.
 
 ## Préparation Firebase
 
 1. Dans Firebase Console, activer le fournisseur **E-mail/Mot de passe** dans
-   Authentication et vérifier que le compte administrateur DJAMI SHOP peut se connecter.
+   Authentication et vérifier que le compte administrateur RESTO peut se connecter.
 2. La configuration Firebase est définie dans `web/firebase-config.js` pour le
-   projet DJAMI SHOP. La clé API Firebase de configuration est publique ; elle ne doit
+   projet RESTO. La clé API Firebase de configuration est publique ; elle ne doit
    pas être confondue avec un credential de compte de service.
-3. Dans Authentication > Utilisateurs, copier l'UID du compte autorisé et
-   remplacer `REMPLACER_PAR_VOTRE_UID_FIREBASE` par cet UID dans
-   `web/firebase-config.js` (valeur `dashboardAdminUid`) et `firestore.rules`.
-   L'UID est un identifiant, pas un mot de passe ; les règles Firestore
-   restreignent les écritures à cet UID.
-4. Remplacer le marqueur dans les deux fichiers avant le déploiement. Tant qu'il
-   reste présent, aucun compte normal ne peut modifier les données.
+3. Le compte autorisé est celui dont l'UID est `mvDhKiXSv7duDfp5ch2UxNO2kBp1`.
+  Cette valeur est déjà configurée dans `web/firebase-config.js` et
+  `firestore.rules`. Les règles Firestore limitent les écritures à cet UID.
 
 ## Déployer
 
@@ -31,41 +27,13 @@ Héberger le tableau de bord en HTTPS via Firebase Hosting et publier les règle
 Firestore mises à jour. Ne pas l'ouvrir directement depuis `file://` : les
 modules Firebase exigent un serveur Web.
 
-## Distribuer l'application et les mises à jour via Google Play
+## Compiler l'APK
 
-Les mises à jour de DJAMI SHOP seront distribuées par Google Play ; l'application ne
-vérifie plus un manifeste distant et ne télécharge ni n'installe d'APK depuis
-GitHub. Le fichier `web/app-update.json` et l'ancien mécanisme d'installation
-directe ne sont plus utilisés. Firebase Hosting reste dédié au tableau de bord.
-
-L'identifiant Android actuel est `com.djamishop.app` (`package.domain` +
-`package.name` dans `buildozer.spec`) : il doit rester identique pour publier
-des mises à jour de la même application Play. La configuration Buildozer
-actuelle produit une APK release (`android.release_artifact = apk`). Le workflow
-GitHub Actions construit et téléverse cette APK release signée ; il nécessite
-les secrets `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`,
-`ANDROID_KEY_ALIAS` et `ANDROID_KEY_PASSWORD`. Il ne produit pas d'Android App
-Bundle (`aab`).
-
-Avant une publication Play, il faudra :
-
-1. Créer l'application dans la Play Console et compléter les informations
-   demandées, puis activer Play App Signing.
-2. Incrémenter `android.numeric_version` à chaque publication (la version
-   préparée est actuellement le code `2`) et modifier `version` pour le nom
-   affiché.
-3. Configurer Buildozer et le workflow pour produire un bundle release signé
-   (`aab`) avec la clé d'envoi Play, puis téléverser le `.aab` dans une piste de
-   test interne avant la production. Garder une sauvegarde privée de la clé
-   d'envoi ; ne pas la committer.
-4. Installer la version de test depuis Play. Ensuite, Play gère la distribution
-   des mises à jour selon les réglages de l'utilisateur (mises à jour
-   automatiques, ou mise à jour manuelle depuis le Play Store).
-
-L'APK debug distribuée auparavant hors Play peut avoir une signature différente
-de celle installée par Play. Si Android refuse la première installation Play
-par-dessus, il faudra désinstaller l'ancienne APK puis installer l'application
-depuis la piste de test Play ; les données locales peuvent être effacées.
+L'identifiant Android est `com.resto.app` (`package.domain` + `package.name`
+dans `buildozer.spec`). Buildozer est configuré pour produire une APK. La
+compilation et le téléchargement de l'APK seront lancés manuellement depuis
+GitHub, comme prévu ; ne changez pas l'identifiant du package pour les builds
+suivants.
 
 Les lectures des collections `produits`, `publications` et `contenu` sont
 publiques pour les appareils clients. Seul l'UID configuré peut écrire dans
@@ -84,7 +52,7 @@ ne nécessite pas une nouvelle publication Android. Le compte admin doit se
 connecter avec l'UID configuré dans le tableau de bord. Le document
 `contenu/apropos` contient aussi `apropos_lien_url`,
 destination HTTPS du lien `apropos_lien_texte`; l'application l'ouvre depuis la
-page « À propos ». Sa valeur par défaut est `https://superlife-togo.com`. Le
+page « À propos ». Sa valeur par défaut est `https://laur-dor.web.app`. Le
 lien CONTACT est défini par `apropos_contact_texte` et
 `apropos_contact_url`; son URL HTTPS peut être modifiée dans « Accueil et infos ».
 
@@ -98,7 +66,7 @@ Les anciens produits sans ce champ continuent d’utiliser le numéro historique
 
 Le tableau de bord téléverse directement les images vers Cloudinary avec le
 cloud `jvljzrue` et le preset non signé `vente_images` (configuration Cloudinary
-existante, indépendante du projet Firebase DJAMI SHOP). Aucune clé secrète ni
+existante, indépendante du projet Firebase RESTO). Aucune clé secrète ni
 Firebase Storage n'est utilisé. Firestore conserve l'URL HTTPS `secure_url`
 renvoyée par Cloudinary dans le champ `image` des collections `produits` et
 `publications` et dans les champs d'image de `contenu/accueil` et

@@ -37,9 +37,9 @@ const publicationForm = $("#publication-form");
 const records = { produits: [], publications: [] };
 const defaultContent = {
   accueil: {
-    accueil_titre: "Bienvenue Chez SUPERLIFE TOGO!",
-    accueil_description: "DÃ©couvrez nos produits et nos infos en exclusivitÃ©s.",
-    accueil_bouton_produits: "PRODUITS",
+    accueil_titre: "Bienvenue chez Laur & Dor Gourmet",
+    accueil_description: "Découvrez la carte et les actualités de notre restaurant.",
+    accueil_bouton_produits: "LA CARTE",
     accueil_bouton_infos: "NOS INFOS",
     logo_1: "images/logo.png",
     logo_2: "images/logo1.png",
@@ -48,14 +48,14 @@ const defaultContent = {
   },
   apropos: {
     infos_titre: "INFOS & ACTUALITÃ‰S",
-    apropos_titre: "Ã€ PROPOS",
+    apropos_titre: "À propos de Laur & Dor Gourmet",
     apropos_description:
-      " Pour toutes informations sur notre entreprise, rendez-vous sur notre site Web officiel.",
-    apropos_lien_texte: "SUPERLIFE-TOGO.COM",
-    apropos_lien_url: "https://superlife-togo.com",
+      "Un restaurant où découvrir une cuisine généreuse et partager un bon moment.",
+    apropos_lien_texte: "RESTO WEB",
+    apropos_lien_url: "https://laur-dor.web.app",
     apropos_contact_texte: "CONTACT",
-    apropos_contact_url: "https://superlife-togo.com",
-    photo: "images/proprietaire.jpg",
+    apropos_contact_url: "https://laur-dor.web.app",
+    photo: "",
   },
 };
 const content = {
