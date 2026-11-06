@@ -1,6 +1,6 @@
 [app]
 
-title = LAUR&DOR
+title = LAUR&amp;DOR
 package.name = app
 package.domain = com.resto
 
